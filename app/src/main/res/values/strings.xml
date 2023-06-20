@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">MobileApp</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string-array name="routes">
+        <item>Central / Tsim Sha Tsui</item>
+        <item>Wan Chai / Tsim Sha Tsui</item>
+    </string-array>
+    <string-array name="traveler_types">
+        <item>Adult</item>
+        <item>Child (3-12 years)</item>
+        <item>Disabled</item>
+        <item>Senior (65+ years)</item>
+    </string-array>
+    <string-array name="day_types">
+        <item>Weekdays (excluding public holidays)</item>
+        <item>Weekends and public holidays</item>
+    </string-array>
+    <string name="select_day_type">Select Day Type</string>
+    <string name="select_traveler_type">Select Day Type</string>
+    <string name="select_route">Select Day Type</string>
+
+
+</resources>
