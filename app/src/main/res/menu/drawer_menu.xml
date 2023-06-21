@@ -9,6 +9,18 @@
             android:id="@+id/nav_act2"
             android:icon="@android:drawable/ic_menu_manage"
             android:title="Activity 2" />
+        <item
+            android:id="@+id/nav_act3"
+            android:icon="@android:drawable/ic_menu_manage"
+            android:title="Activity 3" />
+        <item
+            android:id="@+id/nav_act4"
+            android:icon="@android:drawable/ic_menu_manage"
+            android:title="Activity 4" />
+        <item
+            android:id="@+id/nav_act5"
+            android:icon="@android:drawable/ic_menu_manage"
+            android:title="Activity 5" />
         <!-- Add more menu items for other activities (Act3 to Act7) -->
     </group>
 </menu>
