@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-feature
         android:name="android.hardware.sensor.accelerometer"
         android:required="true" />
+    <meta-data
+        android:name="firebase_database_url"
+        android:value="https://mobileapp-7b6c9-default-rtdb.asia-southeast1.firebasedatabase.app" />
 
     <application
         android:allowBackup="true"

@@ -1,21 +1,21 @@
 package com.example.mobileapp;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
-import android.content.ContentResolver;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -26,52 +26,59 @@ import com.google.firebase.storage.UploadTask;
 
 public class Act3 extends AppCompatActivity {
 
-    private Button uploadBtn, showAllBtn;
+    private static final int REQUEST_CODE_IMAGE = 101;
     private ImageView imageView;
+    private EditText placeEditText, descriptionEditText;
+    private Button btnUpload, btnShowAll;
     private ProgressBar progressBar;
 
-    private DatabaseReference root = FirebaseDatabase.getInstance("https://mobileapp-7b6c9-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("Image");
-    private StorageReference reference = FirebaseStorage.getInstance().getReference();
-    private Uri imageUri;
+    Uri imageUri;
+
+    private StorageReference storageReference;
+    private DatabaseReference databaseReference;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_act3);
 
-        uploadBtn = findViewById(R.id.upload_btn);
-        showAllBtn = findViewById(R.id.showall_btn);
         imageView = findViewById(R.id.imageView);
+        placeEditText = findViewById(R.id.place_edit_text);
+        descriptionEditText = findViewById(R.id.description_edit_text);
+        btnUpload = findViewById(R.id.upload_btn);
+        btnShowAll = findViewById(R.id.showall_btn);
         progressBar = findViewById(R.id.progressBar);
 
-        progressBar.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.GONE);
 
-        showAllBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Act3.this, ShowActivity.class));
-            }
-        });
+        storageReference = FirebaseStorage.getInstance().getReference().child("Image");
+        databaseReference = FirebaseDatabase.getInstance("https://mobileapp-7b6c9-default-rtdb.asia-southeast1.firebasedatabase.app").getReference().child("Image");
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent galleryIntent = new Intent();
-                galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
-                galleryIntent.setType("image/*");
-                startActivityForResult(galleryIntent, 2);
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/*");
+                startActivityForResult(intent, REQUEST_CODE_IMAGE);
             }
         });
 
-        uploadBtn.setOnClickListener(new View.OnClickListener() {
+        btnUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (imageUri != null){
+                if (imageUri != null) {
                     uploadToFirebase(imageUri);
-
-                }else{
-                    Toast.makeText(Act3.this,"Please SelectImage", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(Act3.this, "Please select an image", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        btnShowAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Act3.this, ShowActivity.class));
             }
         });
     }
@@ -79,34 +86,30 @@ public class Act3 extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == 2 && resultCode == RESULT_OK && data != null){
-
+        if (requestCode == REQUEST_CODE_IMAGE && resultCode == RESULT_OK) {
             imageUri = data.getData();
             imageView.setImageURI(imageUri);
-
         }
     }
 
     private void uploadToFirebase(Uri uri) {
-        final StorageReference fileRef = reference.child(System.currentTimeMillis() + "." + getFileExtension(uri));
+        StorageReference fileRef = storageReference.child(System.currentTimeMillis() + "." + getFileExtension(uri));
         fileRef.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        Model model = new Model(uri.toString());
-                        String modelId = root.push().getKey();
-                        root.child(modelId).setValue(model);
-                        progressBar.setVisibility(View.INVISIBLE);
+                        String place = placeEditText.getText().toString().trim();
+                        String description = descriptionEditText.getText().toString().trim();
+                        Model model = new Model(uri.toString(), place, description);
+                        String modelId = databaseReference.push().getKey();
+                        databaseReference.child(modelId).setValue(model);
+                        progressBar.setVisibility(View.GONE);
                         Toast.makeText(Act3.this, "Uploaded Successfully", Toast.LENGTH_SHORT).show();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        progressBar.setVisibility(View.INVISIBLE);
-                        Toast.makeText(Act3.this, "Failed to Get Download URL: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        imageView.setImageResource(R.drawable.ic_launcher_background);
+                        placeEditText.setText("");
+                        descriptionEditText.setText("");
                     }
                 });
             }
@@ -115,18 +118,10 @@ public class Act3 extends AppCompatActivity {
             public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
                 progressBar.setVisibility(View.VISIBLE);
             }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                progressBar.setVisibility(View.INVISIBLE);
-                Toast.makeText(Act3.this, "Uploading Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
         });
     }
 
-    private String getFileExtension(Uri mUri ){
-        ContentResolver cr = getContentResolver();
-        MimeTypeMap mime = MimeTypeMap.getSingleton();
-        return mime.getExtensionFromMimeType(cr.getType(mUri));
+    private String getFileExtension(Uri uri) {
+        return MimeTypeMap.getSingleton().getExtensionFromMimeType(this.getContentResolver().getType(uri));
     }
 }
