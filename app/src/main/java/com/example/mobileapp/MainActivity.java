@@ -5,27 +5,49 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private Button btnLogout;
     private FirebaseAuth mAuth;
     private DrawerLayout drawerLayout;
 
+    private Context context;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d("Act2", "onCreate: layout inflated");
+//        Log.d("Act2", "onCreate: layout inflated");
+
+        context = this;
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -52,6 +74,58 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+
+        fetchNewsData();
+
+    }
+
+    private void fetchNewsData() {
+        String url = "https://fileprojectwork.ivemobileapp6.repl.co/latestnews";
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            String status = response.getString("status");
+                            if ("Success".equals(status)) {
+                                JSONArray newsJsonArray = response.getJSONArray("data");
+                                List<News> newsList = new ArrayList<>();
+
+                                for (int i = 0; i < newsJsonArray.length(); i++) {
+                                    JSONObject newsJson = newsJsonArray.getJSONObject(i);
+                                    String title = newsJson.getString("title");
+                                    String content = newsJson.optString("content", ""); // Use optString to handle missing content
+                                    String date = newsJson.getString("date");
+                                    newsList.add(new News(title, content, date));
+                                }
+
+                                setupNewsRecyclerView(newsList);
+                            } else {
+                                Toast.makeText(MainActivity.this, "Error fetching news data", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(MainActivity.this, "Error fetching news data", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // Handle error
+                Toast.makeText(MainActivity.this, "Error fetching news data", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(request);
+    }
+
+    private void setupNewsRecyclerView(List<News> newsList) {
+        RecyclerView recyclerView = findViewById(R.id.news_recycler_view);
+        NewsAdapter newsAdapter = new NewsAdapter(context, newsList);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(newsAdapter);
     }
 
     @Override
@@ -75,7 +149,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             intent = new Intent(MainActivity.this, Payment.class);
             startActivity(intent);
         }
-        // Add other cases for Act3 to Act7 using else if statements
 
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;

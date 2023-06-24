@@ -216,7 +216,6 @@
 //}
 
 package com.example.mobileapp;
-import java.text.SimpleDateFormat;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -358,12 +357,9 @@ public class Payment extends AppCompatActivity {
             String itemName = radioGroup.getCheckedRadioButtonId() == R.id.monthlyPassRadioButton ? "Monthly Pass" : "Four Day Pass";
             saveReferenceCode(referenceCode, itemName);
         } else if (paymentSheetResult instanceof PaymentSheetResult.Failed) {
-            // Handle payment failure
         } else if (paymentSheetResult instanceof PaymentSheetResult.Canceled) {
-            // Handle payment cancellation
         }
 
-        // Generate a new ClientSecret for the next payment attempt
         getClientSecret(CustomerId, EphemeralKey);
     }
 

@@ -16,7 +16,6 @@ public class Model {
         this.description = description;
     }
 
-    // Add getters and setters for the imageUrl field
     public String getImageUrl() {
         return imageUrl;
     }
@@ -25,7 +24,6 @@ public class Model {
         this.imageUrl = imageUrl;
     }
 
-    // Add getters and setters for the place field
     public String getPlace() {
         return place;
     }
@@ -34,7 +32,6 @@ public class Model {
         this.place = place;
     }
 
-    // Add getters and setters for the description field
     public String getDescription() {
         return description;
     }

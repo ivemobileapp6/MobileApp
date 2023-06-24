@@ -3,12 +3,10 @@ package com.example.mobileapp;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatActivity;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.os.Bundle;
 import android.widget.TextView;
 
 public class Act2 extends AppCompatActivity implements SensorEventListener {
@@ -60,6 +58,5 @@ public class Act2 extends AppCompatActivity implements SensorEventListener {
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
-        // Do nothing
     }
 }
