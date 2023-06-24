@@ -272,7 +272,7 @@ public class Payment extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_payment);
 
         payment = findViewById(R.id.payment);
         radioGroup = findViewById(R.id.radioGroup);
@@ -296,7 +296,7 @@ public class Payment extends AppCompatActivity {
 
         Button paymentHistoryButton = findViewById(R.id.payment_history_button);
         paymentHistoryButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, PaymentHistoryActivity.class);
+            Intent intent = new Intent(Payment.this, PaymentHistoryActivity.class);
             startActivity(intent);
         });
 
@@ -314,7 +314,7 @@ public class Payment extends AppCompatActivity {
                         try {
                             JSONObject object = new JSONObject(response);
                             CustomerId = object.getString("id");
-                            Toast.makeText(MainActivity.this, CustomerId, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Payment.this, CustomerId, Toast.LENGTH_SHORT).show();
                             getEphemeralKey();
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
@@ -327,7 +327,7 @@ public class Payment extends AppCompatActivity {
                 if (errorMessage == null || errorMessage.isEmpty()) {
                     errorMessage = "An unknown error occurred.";
                 }
-                Toast.makeText(MainActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                Toast.makeText(Payment.this, errorMessage, Toast.LENGTH_SHORT).show();
             }
         }) {
             @Nullable
@@ -393,7 +393,7 @@ public class Payment extends AppCompatActivity {
                         try {
                             JSONObject object = new JSONObject(response);
                             EphemeralKey = object.getString("id");
-                            Toast.makeText(MainActivity.this, EphemeralKey, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Payment.this, EphemeralKey, Toast.LENGTH_SHORT).show();
                             getClientSecret(CustomerId, EphemeralKey);
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
@@ -406,7 +406,7 @@ public class Payment extends AppCompatActivity {
                 if (errorMessage == null || errorMessage.isEmpty()) {
                     errorMessage = "An unknown error occurred.";
                 }
-                Toast.makeText(MainActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                Toast.makeText(Payment.this, errorMessage, Toast.LENGTH_SHORT).show();
             }
         }) {
             @Nullable
@@ -441,7 +441,7 @@ public class Payment extends AppCompatActivity {
                         try {
                             JSONObject object = new JSONObject(response);
                             ClientSecret = object.getString("client_secret");
-                            Toast.makeText(MainActivity.this, ClientSecret, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Payment.this, ClientSecret, Toast.LENGTH_SHORT).show();
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
                         }
@@ -453,7 +453,7 @@ public class Payment extends AppCompatActivity {
                 if (errorMessage == null || errorMessage.isEmpty()) {
                     errorMessage = "An unknown error occurred.";
                 }
-                Toast.makeText(MainActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                Toast.makeText(Payment.this, errorMessage, Toast.LENGTH_SHORT).show();
             }
         }) {
             @Nullable
