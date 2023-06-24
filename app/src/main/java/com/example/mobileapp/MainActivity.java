@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             intent = new Intent(MainActivity.this, Act4.class);
             startActivity(intent);
         }else if (id == R.id.nav_act5) {
-            intent = new Intent(MainActivity.this, Act5.class);
+            intent = new Intent(MainActivity.this, Payment.class);
             startActivity(intent);
         }
         // Add other cases for Act3 to Act7 using else if statements
