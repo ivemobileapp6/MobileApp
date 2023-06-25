@@ -10,7 +10,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class Act2 extends AppCompatActivity implements SensorEventListener {
+public class SensorActivity extends AppCompatActivity implements SensorEventListener {
     private SensorManager sensorManager;
     private Sensor accelerometer;
     private TextView messageTextView;
@@ -25,7 +25,7 @@ public class Act2 extends AppCompatActivity implements SensorEventListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_act2);
+        setContentView(R.layout.activity_sensor_activity);
 
         degreetxt = findViewById(R.id.tvDegrees);
         compassing = findViewById(R.id.compassimg);

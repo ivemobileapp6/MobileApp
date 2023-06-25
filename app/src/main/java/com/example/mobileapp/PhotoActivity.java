@@ -1,13 +1,12 @@
 package com.example.mobileapp;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -24,7 +23,7 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-public class Act3 extends AppCompatActivity {
+public class PhotoActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE_IMAGE = 101;
     private ImageView imageView;
@@ -40,7 +39,7 @@ public class Act3 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_act3);
+        setContentView(R.layout.activity_photo);
 
         imageView = findViewById(R.id.imageView);
         placeEditText = findViewById(R.id.place_edit_text);
@@ -70,7 +69,7 @@ public class Act3 extends AppCompatActivity {
                 if (imageUri != null) {
                     uploadToFirebase(imageUri);
                 } else {
-                    Toast.makeText(Act3.this, "Please select an image", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PhotoActivity.this, "Please select an image", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -78,9 +77,12 @@ public class Act3 extends AppCompatActivity {
         btnShowAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Act3.this, ShowActivity.class));
+                startActivity(new Intent(PhotoActivity.this, ShowActivity.class));
             }
         });
+
+        // Set the default image for the "Add a photo" button
+        imageView.setImageResource(R.drawable.baseline_add_a_photo_24);
     }
 
     @Override
@@ -106,8 +108,8 @@ public class Act3 extends AppCompatActivity {
                         String modelId = databaseReference.push().getKey();
                         databaseReference.child(modelId).setValue(model);
                         progressBar.setVisibility(View.GONE);
-                        Toast.makeText(Act3.this, "Uploaded Successfully", Toast.LENGTH_SHORT).show();
-                        imageView.setImageResource(R.drawable.ic_launcher_background);
+                        Toast.makeText(PhotoActivity.this, "Uploaded Successfully", Toast.LENGTH_SHORT).show();
+                        imageView.setImageResource(R.drawable.baseline_add_a_photo_24); // Reset the "Add a photo" button to the default image
                         placeEditText.setText("");
                         descriptionEditText.setText("");
                     }

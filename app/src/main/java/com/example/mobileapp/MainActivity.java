@@ -124,20 +124,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(newsAdapter);
     }
-
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
         Intent intent;
 
         if (id == R.id.nav_act1) {
-            intent = new Intent(MainActivity.this, Act1.class);
+            intent = new Intent(MainActivity.this, FareInformationActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_act2) {
-            intent = new Intent(MainActivity.this, Act2.class);
+            intent = new Intent(MainActivity.this, SensorActivity.class);
             startActivity(intent);
         }else if (id == R.id.nav_act3) {
-            intent = new Intent(MainActivity.this, Act3.class);
+            intent = new Intent(MainActivity.this, PhotoActivity.class);
             startActivity(intent);
         }else if (id == R.id.nav_act4) {
             intent = new Intent(MainActivity.this, Act4.class);

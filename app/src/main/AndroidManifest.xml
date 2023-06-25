@@ -32,9 +32,9 @@
             android:exported="false" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".Act1" />
-        <activity android:name=".Act2" />
-        <activity android:name=".Act3" />
+        <activity android:name=".FareInformationActivity" />
+        <activity android:name=".SensorActivity" />
+        <activity android:name=".PhotoActivity" />
         <activity android:name=".Act4" />
         <activity android:name=".Payment" />
         <activity android:name=".PaymentHistoryActivity" />

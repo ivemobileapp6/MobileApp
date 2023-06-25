@@ -5,7 +5,7 @@
     android:id="@+id/degr"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Act2">
+    tools:context=".SensorActivity">
 
     <TextView
         android:id="@+id/messageTextView"

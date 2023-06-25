@@ -1,6 +1,5 @@
 package com.example.mobileapp;
 
-
 public class PaymentHistoryItem {
 
     private String referenceCode;

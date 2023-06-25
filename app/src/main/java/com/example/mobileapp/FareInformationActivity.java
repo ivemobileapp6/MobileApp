@@ -3,17 +3,13 @@ package com.example.mobileapp;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-public class Act1 extends AppCompatActivity {
+public class FareInformationActivity extends AppCompatActivity {
 
     private Spinner routesSpinner;
     private Spinner travelerTypeSpinner;
@@ -24,7 +20,7 @@ public class Act1 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_act1);
+        setContentView(R.layout.activity_fare_information);
 
         routesSpinner = findViewById(R.id.routesSpinner);
         travelerTypeSpinner = findViewById(R.id.travelerTypeSpinner);

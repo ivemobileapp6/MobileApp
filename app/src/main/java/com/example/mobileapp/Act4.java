@@ -88,7 +88,6 @@ public class Act4 extends AppCompatActivity {
                             MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("Current Location !");
                             googleMap.addMarker(markerOptions);
 
-                            // Add two more markers
                             LatLng markerLatLng1 = new LatLng(22.294 , 114.16857);
                             MarkerOptions markerOptions1 = new MarkerOptions().position(markerLatLng1).title("Tsim Sha Tsui Star Ferry Pier");
                             googleMap.addMarker(markerOptions1);
@@ -98,7 +97,7 @@ public class Act4 extends AppCompatActivity {
                             googleMap.addMarker(markerOptions2);
 
                             LatLng markerLatLng3= new LatLng(22.283391 ,  114.176217);
-                            MarkerOptions markerOptions3 = new MarkerOptions().position(markerLatLng2).title("Wan Chai Star Ferry Pier");
+                            MarkerOptions markerOptions3 = new MarkerOptions().position(markerLatLng3).title("Wan Chai Star Ferry Pier");
                             googleMap.addMarker(markerOptions3);
 
                             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
