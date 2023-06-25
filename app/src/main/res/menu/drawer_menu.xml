@@ -30,6 +30,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:icon="@android:drawable/ic_menu_manage"
-            android:title="Activity 7" />
+            android:title="Schedule" />
     </group>
 </menu>

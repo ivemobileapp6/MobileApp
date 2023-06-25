@@ -41,7 +41,7 @@
         <activity android:name=".EditProfile" />
         <activity android:name=".ChangePasswordActivity"/>
         <activity android:name=".EditInformationActivity"/>
-
+        <activity android:name=".ScheduleActivity"/>
         <activity
             android:name=".LoginActivity"
             android:exported="true">

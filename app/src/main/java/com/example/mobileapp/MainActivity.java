@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        Log.d("Act2", "onCreate: layout inflated");
 
         context = this;
 
@@ -148,6 +147,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(intent);
         } else if (id == R.id.nav_act6) {
             intent = new Intent(MainActivity.this, EditProfile.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_act7) {
+            intent = new Intent(MainActivity.this, ScheduleActivity.class);
             startActivity(intent);
         }
 
