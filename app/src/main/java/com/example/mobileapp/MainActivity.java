@@ -148,6 +148,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }else if (id == R.id.nav_act5) {
             intent = new Intent(MainActivity.this, Payment.class);
             startActivity(intent);
+        } else if (id == R.id.nav_act6) {
+            intent = new Intent(MainActivity.this, EditProfile.class);
+            startActivity(intent);
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);

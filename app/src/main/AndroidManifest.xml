@@ -38,6 +38,9 @@
         <activity android:name=".Act4" />
         <activity android:name=".Payment" />
         <activity android:name=".PaymentHistoryActivity" />
+        <activity android:name=".EditProfile" />
+        <activity android:name=".ChangePasswordActivity"/>
+        <activity android:name=".EditInformationActivity"/>
 
         <activity
             android:name=".LoginActivity"
