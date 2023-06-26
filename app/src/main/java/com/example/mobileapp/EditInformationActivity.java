@@ -17,7 +17,6 @@ public class EditInformationActivity extends AppCompatActivity {
     private EditText etLastName;
     private EditText etEmail;
     private Button btnSave;
-
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 

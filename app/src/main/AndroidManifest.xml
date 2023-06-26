@@ -35,7 +35,7 @@
         <activity android:name=".FareInformationActivity" />
         <activity android:name=".SensorActivity" />
         <activity android:name=".PhotoActivity" />
-        <activity android:name=".Act4" />
+        <activity android:name=".Map" />
         <activity android:name=".Payment" />
         <activity android:name=".PaymentHistoryActivity" />
         <activity android:name=".EditProfile" />

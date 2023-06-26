@@ -1,6 +1,5 @@
 package com.example.mobileapp;
 
-
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -29,7 +28,7 @@ import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 
-public class Act4 extends AppCompatActivity {
+public class Map extends AppCompatActivity {
 
     SupportMapFragment supportMapFragment;
     FusedLocationProviderClient fusedLocationProviderClient;
@@ -37,7 +36,7 @@ public class Act4 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_act4);
+        setContentView(R.layout.activity_map);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map);
@@ -105,7 +104,7 @@ public class Act4 extends AppCompatActivity {
                             googleMap.getUiSettings().setZoomControlsEnabled(true);
                             googleMap.getUiSettings().setZoomGesturesEnabled(true);
                         } else {
-                            Toast.makeText(Act4.this, "Please turn on your location app permissions", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Map.this, "Please turn on your location app permissions", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

@@ -75,7 +75,6 @@ public class RegisterActivity extends AppCompatActivity {
                             }
                         });
 
-                        // Add completion listeners for the other fields as well
                         userRef.child("lastName").setValue(lastName, (databaseError, databaseReference) -> {
                             if (databaseError != null) {
                                 Toast.makeText(RegisterActivity.this, "Error saving lastName: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();

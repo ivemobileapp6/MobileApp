@@ -81,7 +81,6 @@ public class PhotoActivity extends AppCompatActivity {
             }
         });
 
-        // Set the default image for the "Add a photo" button
         imageView.setImageResource(R.drawable.baseline_add_a_photo_24);
     }
 

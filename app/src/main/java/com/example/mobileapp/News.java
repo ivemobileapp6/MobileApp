@@ -11,7 +11,6 @@ public class News {
         this.date = date;
     }
 
-    // Getter and setter methods for the title field
     public String getTitle() {
         return title;
     }
@@ -20,7 +19,6 @@ public class News {
         this.title = title;
     }
 
-    // Getter and setter methods for the content field
     public String getContent() {
         return content;
     }
@@ -29,7 +27,6 @@ public class News {
         this.content = content;
     }
 
-    // Getter and setter methods for the date field
     public String getDate() {
         return date;
     }

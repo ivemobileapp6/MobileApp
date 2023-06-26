@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private Context context;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -139,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             intent = new Intent(MainActivity.this, PhotoActivity.class);
             startActivity(intent);
         }else if (id == R.id.nav_act4) {
-            intent = new Intent(MainActivity.this, Act4.class);
+            intent = new Intent(MainActivity.this, Map.class);
             startActivity(intent);
         }else if (id == R.id.nav_act5) {
             intent = new Intent(MainActivity.this, Payment.class);
