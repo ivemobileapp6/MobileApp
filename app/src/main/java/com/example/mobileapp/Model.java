@@ -5,11 +5,9 @@ public class Model {
     private String place;
     private String description;
 
-    // Default constructor is necessary for Firebase
     public Model() {
     }
 
-    // Update the constructor to include the new fields
     public Model(String imageUrl, String place, String description) {
         this.imageUrl = imageUrl;
         this.place = place;

@@ -35,7 +35,6 @@ public class EditProfile extends AppCompatActivity {
         btnEditInformation = findViewById(R.id.btn_edit_information);
         btnChangePassword = findViewById(R.id.btn_change_password);
 
-        // Get the current user information and update UI
         getCurrentUser();
 
         btnEditInformation.setOnClickListener(new View.OnClickListener() {

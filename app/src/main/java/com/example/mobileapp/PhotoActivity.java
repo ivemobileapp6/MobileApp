@@ -121,7 +121,6 @@ public class PhotoActivity extends AppCompatActivity {
             }
         });
     }
-
     private String getFileExtension(Uri uri) {
         return MimeTypeMap.getSingleton().getExtensionFromMimeType(this.getContentResolver().getType(uri));
     }
